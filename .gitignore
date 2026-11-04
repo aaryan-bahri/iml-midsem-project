@@ -1,6 +1,17 @@
-.venv/
-__pycache__/
-.ipynb_checkpoints/
-.claude/
-CLAUDE.md
-*.zip
+# Ignore everything, then allow only what is needed to reproduce the results.
+*
+
+# Code and instructions to rebuild everything
+!.gitignore
+!README.md
+!requirements.txt
+!run_all.py
+!rainfall.ipynb
+
+# Input data
+!iml-2026-track-c-extreme-rainfall/
+!iml-2026-track-c-extreme-rainfall/*.csv
+
+# Results the notebook writes
+!submission.csv
+!experimental_results.csv
