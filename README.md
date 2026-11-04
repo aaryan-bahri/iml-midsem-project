@@ -33,7 +33,9 @@ into `iml-2026-track-c-extreme-rainfall/` (as in this repository). The notebook 
 python run_all.py
 ```
 This runs every cell of `rainfall.ipynb` from top to bottom and regenerates every table, `experimental_results.csv` (44 runs) and `submission.csv` (both written in the project folder, not in `predictions/`).
-Run it with the virtual environment's Python (`.venv\Scripts\python.exe run_all.py` on Windows). A repeated run gave a byte-identical `submission.csv`.
+Run it with the virtual environment's Python (`.venv\Scripts\python.exe run_all.py` on Windows). A repeated run gave a byte-identical `submission.csv`; `experimental_results.csv` is identical except for the `runtime_s` column, which is a wall-clock measurement.
+
+`experimental_results.csv` has exactly the columns of the course template, one row per reported run (no example row). `primary_metric_mean` and `primary_metric_sd` are the mean and standard deviation over the folds of the fold score (average precision, the mean of the AP on seen and on held-out stations); `secondary_metric_*` is ROC-AUC the same way. The holdout rows have one fold, so their standard deviation is empty; the AP over all holdout rows and its 95% interval are in `notes`. `threshold` is empty because average precision uses no threshold. `runtime_s` is the time to fit and predict that run (a blend counts the time of its two members).
 
 ## 4. Map from report to code
 All code is in `rainfall.ipynb`; sections are the notebook's headings.
@@ -89,7 +91,7 @@ What each step does, why we did it, and what it changed in the model (dev = four
 - **Dataset:** IML 2026 Track C simulated extreme rain (course dataset on Kaggle, files dated 15 October 2026).
 - **Course material:** project guide and handout; the course starter notebook `track_c_starter.ipynb`. The data-folder lookup in Section 0 of the notebook is adapted from the starter; the rest of the code is our own.
 - **Libraries:** pandas 3.1.0, NumPy 2.5.4, scikit-learn 1.9.1 (Pedregosa et al., 2011), LightGBM 4.7.0 (Ke et al., 2017), matplotlib 3.11.2, nbformat and nbclient (to run the notebook).
-- **Papers:** none were used beyond the two library papers above; the report's reference list contains only the dataset, the two libraries and the starter notebook.
+- **Papers (full references in the report):** Trenberth et al. (2003); Saito and Rehmsmeier (2015); Roberts et al. (2017); Cawley and Talbot (2010); Kaufman et al. (2012). These are the reading list of the course guide's Track C section; each supports one design choice (heavy-rain drift, average precision, chronological and by-station validation, an untouched holdout, leakage).
 
 ## 8. Declaration
 I confirm that this submission is my own individual work and that I can explain every part of it.
